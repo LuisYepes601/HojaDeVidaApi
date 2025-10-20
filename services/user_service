@@ -1,0 +1,14 @@
+
+const userRepo = require('../repositories/user_repo');
+
+async function crearUsuario(datos) {
+  const existente = await userRepo.buscarPorCorreo(datos.correo);
+  if (existente) throw new Error('El correo ya está registrado');
+  return await userRepo.crear(datos);
+}
+
+async function listarUsuarios() {
+  return await userRepo.listar();
+}
+
+module.exports = { crearUsuario, listarUsuarios };
