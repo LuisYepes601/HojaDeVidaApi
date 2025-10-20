@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 connectDB();
-app.use('/api/users', require('../routes/users'));
+app.use('/api', require('../routes/users'));
 
 
 app.get('/', (req, res) => {
