@@ -10,6 +10,7 @@ app.use(express.json());
 
 connectDB();
 app.use('/api', require('../routes/users'));
+app.use('/api/experiencias', require('../routes/experiencias'));
 
 
 app.get('/', (req, res) => {
