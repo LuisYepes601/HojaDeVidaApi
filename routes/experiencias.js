@@ -3,7 +3,7 @@ const router = express.Router();
 const experienciaController = require('../controllers/experiencia_controller');
 
 // 👉 Crear una nueva experiencia
-router.post('/', experienciaController.crearExperiencia);
+router.post('/crear/', experienciaController.crearExperiencia);
 
 // 👉 Obtener todas las experiencias
 router.get('/', experienciaController.obtenerExperiencias);
