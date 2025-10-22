@@ -44,9 +44,19 @@ exports.obtenerPorUsuario = async (req, res) => {
 };
 
 // Actualizar experiencia
-exports.actualizarExperiencia = async (req, res) => {
+exports.actualizarExperiencia = async (req, res) => { 
   try {
-    const actualizado = await ExperienciaService.actualizarExperiencia(req.params.id, req.body);
+
+    const id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ message: "El ID no puede quedar vacío" });
+    }
+    const actualizado = await ExperienciaService.actualizarExperiencia(id, req.body);
+
+    if (!actualizado) {
+      return res.status(404).json({ message: "Experiencia no encontrada" });
+    }
+    
     res.json(actualizado);
   } catch (error) {
     res.status(400).json({ message: error.message });
