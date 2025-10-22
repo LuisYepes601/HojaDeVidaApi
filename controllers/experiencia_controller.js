@@ -51,11 +51,18 @@ exports.actualizarExperiencia = async (req, res) => {
     if (!id) {
       return res.status(400).json({ message: "El ID no puede quedar vacío" });
     }
-    const actualizado = await ExperienciaService.actualizarExperiencia(id, req.body);
+
+    const body = req.body;
+    if (!body || Object.keys(body).length === 0) {
+      return res.status(400).json({ message: "Los campos no pueden quedar vacíos" });
+    }
+    
+    const actualizado = await ExperienciaService.actualizarExperiencia(id, body);
 
     if (!actualizado) {
       return res.status(404).json({ message: "Experiencia no encontrada" });
     }
+
     
     res.json(actualizado);
   } catch (error) {
