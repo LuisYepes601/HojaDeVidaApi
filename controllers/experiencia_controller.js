@@ -56,7 +56,7 @@ exports.actualizarExperiencia = async (req, res) => {
     if (!body || Object.keys(body).length === 0) {
       return res.status(400).json({ message: "Los campos no pueden quedar vacíos" });
     }
-    
+
     const actualizado = await ExperienciaService.actualizarExperiencia(id, body);
 
     if (!actualizado) {
@@ -66,7 +66,7 @@ exports.actualizarExperiencia = async (req, res) => {
     
     res.json(actualizado);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: "experiencia no encontrada" });
   }
 };
 
