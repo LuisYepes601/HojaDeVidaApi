@@ -25,10 +25,19 @@ exports.obtenerExperiencias = async (req, res) => {
 // Obtener experiencias por usuarioReferencia
 exports.obtenerPorUsuario = async (req, res) => {
   try {
-    const lista = await ExperienciaService.obtenerPorUsuario(req.params.usuarioReferencia);
+
+    const usuarioRef = req.params.usuarioReferencia;
+    if (!usuarioRef) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    const lista = await ExperienciaService.obtenerPorUsuario(usuarioRef);
+
+
+    if (!lista || lista.length === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
     res.json(lista);
   } catch (error) {
-    res.status(404).json({ message: "Usuario no encontrado" });
     res.status(400).json({ message: "Los campos no pueden quedar vacíos" });
     res.status(500).json({ message: "Error interno del servidor" });
   }
