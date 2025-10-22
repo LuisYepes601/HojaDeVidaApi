@@ -4,7 +4,7 @@ const ExperienciaService = require('../services/experiencias_service');
 exports.crearExperiencia = async (req, res) => {
   try {
     const nueva = await ExperienciaService.crearExperiencia(req.body);
-    res.status(201).json(nueva);
+    res.status(201).json({message:"Experiencia creada correctamente"});
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
