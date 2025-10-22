@@ -38,13 +38,13 @@ exports.obtenerPorUsuario = async (req, res) => {
     }
     res.json(lista);
   } catch (error) {
-   
+
     res.status(500).json({ message: "Error interno del servidor" });
   }
 };
 
 // Actualizar experiencia
-exports.actualizarExperiencia = async (req, res) => { 
+exports.actualizarExperiencia = async (req, res) => {
   try {
 
     const id = req.params.id;
@@ -63,7 +63,7 @@ exports.actualizarExperiencia = async (req, res) => {
       return res.status(404).json({ message: "Experiencia no encontrada" });
     }
 
-    
+
     res.json(actualizado);
   } catch (error) {
     res.status(400).json({ message: "experiencia no encontrada" });
@@ -73,7 +73,13 @@ exports.actualizarExperiencia = async (req, res) => {
 // Eliminar experiencia
 exports.eliminarExperiencia = async (req, res) => {
   try {
-    await ExperienciaService.eliminarExperiencia(req.params.id);
+
+    id = req.params.id;
+    if (!id) {
+      return res.status(400).json({ message: "El ID no puede quedar vacío" });
+    }
+
+    await ExperienciaService.eliminarExperiencia(id);
     res.json({ message: 'Experiencia eliminada correctamente' });
   } catch (error) {
     res.status(500).json({ message: error.message });
