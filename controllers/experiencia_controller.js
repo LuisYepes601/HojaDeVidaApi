@@ -82,6 +82,7 @@ exports.eliminarExperiencia = async (req, res) => {
     await ExperienciaService.eliminarExperiencia(id);
     res.json({ message: 'Experiencia eliminada correctamente' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: "Experiencia no encontrada" });
+    res.status(500).json({ message: "Error interno del servidor" });
   }
 };
